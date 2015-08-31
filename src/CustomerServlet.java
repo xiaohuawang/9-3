@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import db.DBCustomer;
+import model.DemoCustomer;
 @WebServlet("/CustomerServlet")
 public class CustomerServlet extends HttpServlet
 {
@@ -14,48 +17,48 @@ public class CustomerServlet extends HttpServlet
 	
 	public void init() throws ServletException
 	{
-		DB db = new DB();
+//		DB db = new DB();
 		// do required initialization
-		 ArrayList<Customer> customers = db.getCustomers();
-		 custTable += Customer.getTableHeader();
-		 for(Customer customer : customers)
+		 List<DemoCustomer> customers = DBCustomer.getAllCustomers();
+		 custTable += DemoCustomer.getTableHeader();
+		 for(DemoCustomer customer : customers)
 		 {
 			  custTable += "<tr>";
 			  custTable += "<td>";
-			  custTable += "<a href=\"details?customerID="+ customer.getCUSTOMER_ID() +"\">" + customer.getCUSTOMER_ID() + "<//a>";
+			  custTable += "<a href=\"details?customerID="+ customer.getCustomerId() +"\">" + customer.getCustomerId() + "<//a>";
 			  custTable += "</td>";
 			  custTable += "<td>";
-			  custTable += customer.getCUST_FIRST_NAME();
+			  custTable += customer.getCustFirstName();
 			  custTable += "</td>";
 			  custTable += "<td>";
-			  custTable += customer.getCUST_LAST_NAME();
+			  custTable += customer.getCustLastName();
 			  custTable += "</td>";
 			  custTable += "<td>";
-			  custTable += customer.getCUST_STREET_ADDRESS1();
+			  custTable += customer.getCustStreetAddress1();
 			  custTable += "</td>";
 			  custTable += "<td>";
-			  custTable += customer.getCUST_STREET_ADDRESS2();
+			  custTable += customer.getCustStreetAddress2();
 			  custTable += "</td>";
 			  custTable += "<td>";
-			  custTable += customer.getCUST_CITY();
+			  custTable += customer.getCustCity();
 			  custTable += "</td>";
 			  custTable += "<td>";
-			  custTable += customer.getCUST_STATE();
+			  custTable += customer.getCustState();
 			  custTable += "</td>";
 			  custTable += "<td>";
-			  custTable += customer.getCUST_POSTAL_CODE();
+			  custTable += customer.getCustPostalCode();
 			  custTable += "</td>";
 			  custTable += "<td>";
-			  custTable += customer.getPHONE_NUMBER1();
+			  custTable += customer.getPhoneNumber1();
 			  custTable += "</td>";
 			  custTable += "<td>";
-			  custTable += customer.getPHONE_NUMBER2();
+			  custTable += customer.getPhoneNumber2();
 			  custTable += "</td>";
 			  custTable += "<td>";
-			  custTable += customer.getCREDIT_LIMIT();
+			  custTable += customer.getCreditLimit();
 			  custTable += "</td>";
 			  custTable += "<td>";
-			  custTable += customer.getCUST_EMAIL();
+			  custTable += customer.getCustEmail();
 			  custTable += "</td>";
 			  custTable += "</tr>";
 		 }

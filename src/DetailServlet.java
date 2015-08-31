@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import db.DBCustomer;
+import model.DemoCustomer;
+
 @WebServlet("/details") 
 public class DetailServlet extends HttpServlet
 {
@@ -25,44 +28,44 @@ public class DetailServlet extends HttpServlet
 		
 		//actual logic goes here
 		
-		String custId = request.getParameter("customerID");
-		
-		DB db = new DB();
-		Customer customer = db.getCustomerFromID(Integer.parseInt(custId));
+		String custIdStr = request.getParameter("customerID");
+		Long custId = Long.parseLong(custIdStr);
+//		DB db = new DB();
+		DemoCustomer customer = DBCustomer.getCustomer(custId);
 		
 		String data = "";
 		data += "<div class=\"panel-heading\">";
 
-		data += customer.getCUST_FIRST_NAME();
+		data += customer.getCustFirstName();
 		data +=" ";
-		data += customer.getCUST_LAST_NAME();
+		data += customer.getCustLastName();
 		data += "</div>";
 		
 		data += "<div class=\"panel-body\">";
 		
 		data += "<p> Adress1: ";
-		data += customer.getCUST_STREET_ADDRESS1();
+		data += customer.getCustStreetAddress1();
 		data += "</p>";
 		data += "<p> Adress2: ";
-		data += customer.getCUST_STREET_ADDRESS2();
+		data += customer.getCustStreetAddress2();
 		data += "</p>  ";
 		data += "<p> City: ";
-		data += customer.getCUST_CITY();
+		data += customer.getCustCity();
 		data += "</p>";
 		data += "<p> State: ";
-		data += customer.getCUST_STATE();
+		data += customer.getCustState();
 		data += "</p>";
 		data += "<p> Zip Code: ";
-		data += customer.getCUST_POSTAL_CODE();
+		data += customer.getCustPostalCode();
 		data += "</p>";
 		data += "<p> Email: ";
-		data += customer.getCUST_EMAIL();
+		data += customer.getCustEmail();
 		data += "</p>";
 		data += "<p> Phone1: ";
-		data += customer.getPHONE_NUMBER1();
+		data += customer.getPhoneNumber1();
 		data += "</p>";
 		data += "<p> Phone2: ";
-		data += customer.getPHONE_NUMBER2();
+		data += customer.getPhoneNumber2();
 		data += "</p>";
 		data += "</div>";
 		request.setAttribute("custTable", data);
